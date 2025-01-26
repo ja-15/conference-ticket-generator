@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: Inconsolata;
+  src: url(./assets/fonts/Inconsolata-VariableFont_wdth,wght) format('truetype');
+  font-weight: 400 800;
+  font-style: normal;
+}
+
+@theme {
+  --font-inconsolata: 'Inconsolata', monospace;
+  }
+
+body {
+  font-family: var(--font-inconsolata);
+}
+.max-container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+html {
+  background-image: 
+  repeating-linear-gradient(
+    90deg, /* Vertical lines */
+    rgba(121, 121, 121, 0.1), /* Line color with opacity */
+    rgba(0, 0, 0, 0.01) 2px, /* Line thickness */
+    transparent 75px, /* Gap start */
+    transparent 75px /* Total width of one line + gap */
+    
+  ),
+    url("./assets/images/background-desktop.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    
+}
