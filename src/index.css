@@ -2,13 +2,15 @@
 
 @font-face {
   font-family: Inconsolata;
-  src: url(./assets/fonts/Inconsolata-VariableFont_wdth,wght) format('truetype');
+  src: url('./assets/fonts/Inconsolata-VariableFont_wdth,wght.ttf' ) format('truetype');
   font-weight: 400 800;
   font-style: normal;
 }
 
 @theme {
   --font-inconsolata: 'Inconsolata', monospace;
+  --color-primary: hsl(7, 88%, 67%);
+  --color-secondary: hsl(7, 71%, 60%);
   }
 
 body {
@@ -34,5 +36,14 @@ html {
     background-position: center;
     background-repeat: no-repeat;
     min-height: 100vh;
-    
 }
+
+.input-text {
+  @apply w-full bg-gray-400/25 rounded-lg p-2 text-neutral-300 mt-1.5 
+  border border-gray-300/50 hover:bg-gray-400/40 outline-0 mb-4
+}
+
+.img-button {
+  @apply text-xs bg-gray-500/30 px-2 py-1 rounded hover:text-primary duration-300 ease-in-out cursor-pointer hover:underline
+}
+
