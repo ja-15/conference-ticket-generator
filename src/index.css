@@ -29,7 +29,7 @@ html {
     rgba(0, 0, 0, 0.01) 2px, /* Line thickness */
     transparent 75px, /* Gap start */
     transparent 75px /* Total width of one line + gap */
-    
+  
   ),
     url("./assets/images/background-desktop.png");
     background-size: cover;
@@ -40,7 +40,7 @@ html {
 
 .input-text {
   @apply w-full bg-gray-400/25 rounded-lg p-2 text-neutral-300 mt-1.5 
-  border border-gray-300/50 hover:bg-gray-400/40 outline-0 mb-4
+  border border-gray-300/50 hover:bg-gray-400/40 outline-0 focus:border-gray-300
 }
 
 .img-button {

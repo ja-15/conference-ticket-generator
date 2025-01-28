@@ -1,24 +1,54 @@
-
-import logoFull from '../assets/images/logo-full.svg';
+import React, { useState, useEffect } from 'react';
 
 import UploadFile from '../components/UploadFile';
-
+import { GoInfo } from "react-icons/go";
+import { useNavigate } from 'react-router-dom';
 
 
 const FormPage = () => {
+  const [fileUpload, setFileUpload] = useState(null);
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [error, setError] = useState('');
+  const [isError, setIsError] = useState(false);
 
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
+
+    if (!email) {
+      setIsError(true);
+      setError("Please enter a valid email address.");
+
+    } else if (isError === true) {
+      return
+    } 
+    else {
+      setIsError(false);
+      setError("");
+      navigate('/ticket', {state: {email, name, fileUpload, username}})
+    }
   }
 
+  useEffect(() => {
+    const storedEmail = localStorage.getItem('email');
+    if (storedEmail === email) {
+      setError('Email already registered')
+      setIsError(true)
+    }else {
+      setError('')
+      setIsError(false)
+    }
+  }, [email])
+  
 
 
 
   return (
-    <div className='flex flex-col items-center mx-auto text-center md:w-[40%] px-3'>
-      <img src={logoFull} alt='logo' className='items-start size-32' />
-      <h1 className='text-4xl font-bold text-white'>
+    <>
+      <h1 className='md:text-4xl text-3xl font-bold text-white'>
         Your Journey to Coding Conf 2025 Starts Here!
       </h1>
       <p className='py-6 text-neutral-300' >
@@ -29,21 +59,36 @@ const FormPage = () => {
         className='text-gray-300 text-start md:w-[70%] mb-30'>
         <label className='text-sm text-neutral-300'>Upload Avatar</label>
           
-        <UploadFile />
+        <UploadFile
+         setFileUpload={setFileUpload}/>
           
-        <label className='text-sm'>Full Name</label>
+        <label className='text-sm '>Full Name</label>
         <input type='text'
-          className='input-text' />
+          value={name}
+          placeholder='Enter your full name'
+          onChange={(e) => setName(e.target.value)}
+          className='input-text mb-3' />
 
         <label className='text-sm'>Email Address</label>
         <input type='email'
-          className='input-text'
+          className='input-text mb-1.5'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           placeholder='example@email.com' />
 
+          <div className='flex'>
+          <GoInfo className={`${isError ? 'mb-2 text-primary' : 'hidden'}`} />
+          {error && ( <span className='text-primary text-xs pl-2 font-inconsolata'>{error}</span>) }
+          </div>
+
+        <div className='mt-3'>
         <label className='text-sm'>GitHub Username</label>
         <input type='text'
-          className='input-text'
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className='input-text mb-4'
           placeholder='@yourusername' />
+          </div>
 
         <button 
           
@@ -53,8 +98,8 @@ const FormPage = () => {
 
 
       </form>
-
-      </div>
+      </>
+      
   )
 }
 
